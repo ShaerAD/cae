@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加入我们</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #a8d8ff 0%, #6ecbf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+            transition: background 0.5s ease;
+        }
+        
+        .bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-100vh) rotate(180deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-200vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        header {
+            background: linear-gradient(to right, rgba(18, 183, 245, 0.2), rgba(7, 112, 227, 0.2));
+            color: #1e3a8a;
+            padding: 60px 40px;
+            text-align: center;
+            border-bottom: 1px solid rgba(30, 58, 138, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #1e3a8a;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        header p {
+            font-size: 1.8rem;
+            color: #1e3a8a;
+            font-weight: 500;
+        }
+        
+        .content {
+            padding: 50px 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid rgba(30, 58, 138, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: rgba(30, 58, 138, 0.7);
+            animation: slideIn 1s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100px;
+            }
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 18px;
+            padding: 35px 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transform: translateX(-20px);
+            opacity: 0;
+            animation: slideInCard 0.6s ease-out forwards;
+        }
+        
+        .card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+        
+        .card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes slideInCard {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .qq-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: #1e3a8a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+            font-size: 2.5rem;
+            color: white;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .qq-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .qq-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .card-title {
+            font-size: 2rem;
+            color: #1e3a8a;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .card-header p {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        .card-description {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 15px;
+            line-height: 1.4;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: rgba(18, 183, 245, 0.3);
+            color: #1e3a8a;
+            border: 2px solid rgba(30, 58, 138, 0.5);
+        }
+        
+        .btn-primary:hover {
+            background: rgba(30, 58, 138, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
+        }
+        
+        .btn-news {
+            background: rgba(46, 204, 113, 0.3);
+            color: #1e3a8a;
+            border: 2px solid rgba(30, 58, 138, 0.5);
+        }
+        
+        .btn-news:hover {
+            background: rgba(46, 204, 113, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+        
+        .btn i {
+            color: #1e3a8a;
+            margin-right: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .btn:hover i {
+            transform: scale(1.2);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #1e3a8a;
+            font-size: 1.2rem;
+            border-top: 1px solid rgba(30, 58, 138, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* 顶部按钮区域 */
+        .top-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .top-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .top-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.1);
+        }
+        
+        .clock-btn {
+            display: none;
+        }
+        
+        .clock-btn.active {
+            display: flex;
+        }
+        
+        .news-top-btn {
+            display: none;
+        }
+        
+        .news-top-btn.active {
+            display: flex;
+        }
+        
+        .download-top-btn {
+            display: none;
+        }
+        
+        .download-top-btn.active {
+            display: flex;
+        }
+        
+        /* 设置菜单 */
+        .settings-menu {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: none;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            min-width: 200px;
+        }
+        
+        .settings-menu.active {
+            display: block;
+        }
+        
+        .settings-option {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+        
+        .settings-option:hover {
+            background: rgba(30, 58, 138, 0.1);
+        }
+        
+        .settings-option:last-child {
+            margin-bottom: 0;
+        }
+        
+        .clock-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 25px;
+            background: #ccc;
+            border-radius: 25px;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        
+        .toggle-switch.active {
+            background: #1e3a8a;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 21px;
+            height: 21px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(25px);
+        }
+        
+        .language-options {
+            border-top: 1px solid rgba(30, 58, 138, 0.2);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        
+        /* 时钟显示 */
+        .clock-display {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 15px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #1e3a8a;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .clock-display.active {
+            display: block;
+        }
+        
+        /* 完整的时钟页面样式 */
+        .clock-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3a8a 0%, #6ecbf5 100%);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .clock-page.active {
+            display: flex;
+            opacity: 1;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .clock-page .clock-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            width: 400px;
+            height: 400px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: pulseClock 2s infinite alternate;
+        }
+        
+        @keyframes pulseClock {
+            from {
+                transform: scale(1);
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            }
+            to {
+                transform: scale(1.05);
+                box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
+            }
+        }
+        
+        .clock-page .clock-face {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .clock-page .hour-hand, .clock-page .minute-hand, .clock-page .second-hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom;
+            border-radius: 10px;
+            transition: transform 0.5s cubic-bezier(0.4, 2.3, 0.8, 1);
+        }
+        
+        .clock-page .hour-hand {
+            width: 8px;
+            height: 30%;
+            background: #ff9f43;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        
+        .clock-page .minute-hand {
+            width: 6px;
+            height: 40%;
+            background: #2e86de;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+        
+        .clock-page .second-hand {
+            width: 2px;
+            height: 45%;
+            background: #ee5253;
+            transform: translateX(-50%);
+            z-index: 30;
+        }
+        
+        .clock-page .center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            z-index: 40;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        .clock-page .clock-number {
+            position: absolute;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .clock-page .digital-clock {
+            margin-top: 40px;
+            font-size: 3rem;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            }
+            to {
+                box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+            }
+        }
+        
+        .clock-page .back-btn {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .clock-page .back-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .clock-page .back-btn:hover::before {
+            left: 100%;
+        }
+        
+        .clock-page .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .clock-page .clock-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        /* 新闻页面样式 */
+        .news-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3a8a 0%, #6ecbf5 100%);
+            z-index: 2000;
+            padding: 40px;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .news-page.active {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .news-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .news-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: white;
+            animation: none;
+        }
+        
+        .news-header p {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .news-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .news-item h3 {
+            color: #1e3a8a;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .news-content {
+            color: #1e3a8a;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .news-image {
+            width: 100%;
+            border-radius: 12px;
+            margin: 15px 0;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .back-btn {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .back-btn:hover::before {
+            left: 100%;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* 下载页面样式 */
+        .download-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3a8a 0%, #6ecbf5 100%);
+            z-index: 2000;
+            padding: 40px;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .download-page.active {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .download-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .download-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: white;
+            animation: none;
+        }
+        
+        .download-header p {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .download-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .download-category-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 15px;
+            padding: 20px 30px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 200px;
+        }
+        
+        .download-category-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .download-category-btn.active {
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+        
+        .download-category-btn i {
+            font-size: 1.8rem;
+        }
+        
+        .download-content {
+            display: none;
+        }
+        
+        .download-content.active {
+            display: block;
+        }
+        
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .download-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .download-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .download-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: center;
+        }
+        
+        .download-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .download-info {
+            flex-grow: 1;
+        }
+        
+        .download-info h3 {
+            color: #1e3a8a;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .download-info p {
+            color: #1e3a8a;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .download-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .download-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #6ecbf5 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.4);
+        }
+        
+        /* 设置页面样式 - B站手机版风格 */
+        .settings-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f4f4f4;
+            z-index: 2000;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .settings-page.active {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .settings-header {
+            background: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .settings-header .back-btn {
+            margin: 0;
+            padding: 10px;
+            background: none;
+            color: #1e3a8a;
+            font-size: 1.5rem;
+            box-shadow: none;
+        }
+        
+        .settings-header .back-btn:hover {
+            background: none;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .settings-header h1 {
+            font-size: 1.5rem;
+            color: #1e3a8a;
+            margin: 0;
+            animation: none;
+        }
+        
+        .settings-section {
+            background: white;
+            margin: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .settings-section h2 {
+            color: #1e3a8a;
+            font-size: 1.2rem;
+            padding: 15px 20px;
+            margin: 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .settings-option-large {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+        
+        .settings-option-large:last-child {
+            border-bottom: none;
+        }
+        
+        .settings-option-large:hover {
+            background: #f9f9f9;
+        }
+        
+        .settings-option-large span {
+            color: #333;
+            font-size: 1rem;
+        }
+        
+        .settings-option-large .option-desc {
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .settings-option-large .option-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .background-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .background-option {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .background-option:hover {
+            transform: scale(1.05);
+        }
+        
+        .background-option.active {
+            border-color: #1e3a8a;
+        }
+        
+        .bg-1 {
+            background: linear-gradient(135deg, #a8d8ff 0%, #6ecbf5 100%);
+        }
+        
+        .bg-2 {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        }
+        
+        .bg-3 {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+        }
+        
+        .bg-4 {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+        }
+        
+        .bg-5 {
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+        }
+        
+        .bg-6 {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            header {
+                padding: 40px 20px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            header p {
+                font-size: 1.4rem;
+            }
+            
+            .content {
+                padding: 25px 20px;
+                gap: 25px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            
+            .card {
+                padding: 25px 20px;
+            }
+            
+            .card-header {
+                margin-bottom: 20px;
+            }
+            
+            .qq-icon {
+                width: 70px;
+                height: 70px;
+                margin-right: 18px;
+                font-size: 1.8rem;
+            }
+            
+            .card-title {
+                font-size: 1.5rem;
+            }
+            
+            .card-header p {
+                font-size: 1rem;
+            }
+            
+            .card-description {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+            
+            .btn {
+                padding: 14px;
+                font-size: 1.1rem;
+                margin-top: 10px;
+            }
+            
+            footer {
+                padding: 20px;
+                font-size: 0.9rem;
+            }
+            
+            .news-page, .download-page, .settings-page {
+                padding: 20px;
+            }
+            
+            .news-header h1, .download-header h1, .settings-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .clock-display {
+                top: 80px;
+                right: 15px;
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
+            
+            .top-buttons {
+                top: 15px;
+                right: 15px;
+            }
+            
+            .top-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            
+            .clock-page .clock-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .clock-page .digital-clock {
+                font-size: 2rem;
+                padding: 15px 30px;
+            }
+            
+            .clock-page .clock-title {
+                font-size: 2rem;
+            }
+            
+            .download-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .download-category-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .download-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .background-option {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bubbles" id="bubbles"></div>
+    
+    <!-- 顶部按钮区域 -->
+    <div class="top-buttons">
+        <button class="top-btn download-top-btn" id="downloadTopBtn" title="下载">
+            <i class="fas fa-archive"></i>
+        </button>
+        
+        <button class="top-btn news-top-btn" id="newsTopBtn" title="外援">
+            <i class="fas fa-globe"></i>
+        </button>
+        
+        <button class="top-btn clock-btn" id="clockTopBtn" title="时钟">
+            <i class="fas fa-clock"></i>
+        </button>
+        
+        <!-- 设置按钮 -->
+        <button class="top-btn" id="settingsBtn" title="设置">
+            <i class="fas fa-cog"></i>
+        </button>
+        
+        <!-- 设置菜单 -->
+        <div class="settings-menu" id="settingsMenu">
+            <div class="settings-option clock-toggle">
+                <span>启用时钟</span>
+                <div class="toggle-switch" id="clockToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            <div class="settings-option news-toggle">
+                <span>显示外援</span>
+                <div class="toggle-switch" id="newsToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            <div class="settings-option download-toggle">
+                <span>启用下载</span>
+                <div class="toggle-switch" id="downloadToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            <div class="language-options">
+                <div class="settings-option" data-lang="zh-CN">简体中文</div>
+                <div class="settings-option" data-lang="zh-TW">繁體中文</div>
+                <div class="settings-option" data-lang="en">English</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 时钟显示 -->
+    <div class="clock-display" id="clockDisplay"></div>
+    
+    <!-- 主页面 -->
+    <div class="container">
+        <header>
+            <h1 data-key="title">加入我们</h1>
+            <p data-key="subtitle">QQ</p>
+        </header>
+        
+        <div class="content">
+            <div class="community-section">
+                <h2 class="section-title" data-key="groupInfo">群信息</h2>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="qq-icon">
+                            <img src="https://youke1.picui.cn/s1/2025/11/01/6905b51034bc1.png" alt="QQ群图标">
+                        </div>
+                        <div>
+                            <h2 class="card-title">C.A.E Stars</h2>
+                            <p data-key="welcome">欢迎加入</p>
+                        </div>
+                    </div>
+                    
+                    <p class="card-description" data-key="joinDesc">
+                        ↓点击加入
+                    </p>
+                    
+                    <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=DqdEhEVT0W4kiBWkDEPZf2GKldpvNBSZGjPl0sm0HqKtt021JBtkOzM8bWf6ImXM&busi_data=eyJncm91cENvZGUiOiIxMDYwMTA4NTg0IiwidG9rZW4iOiJqRVRDMHFrRTM1UTdSY2cxaU5oRDRMV2tuMzFSUklpMDRTNlRrQnpxbG5QWXVOb3QrRXJnSTJwMWVFR3hYa2Q1IiwidWluIjoiMjA4NDQ1OTYwOCJ9&data=hKZO4kTlBeqMKyYQyFZHAnMqaHjn7ooOJ2Wvb6stXdWdR3FRi7XyJ27kjPdyUjRvacr-84MBiVvOgBa3jxp-PA&svctype=4&tempid=h5_group_info" class="btn btn-primary" target="_blank">
+                        <i class="fab fa-qq"></i> <span data-key="joinBtn">加入QQ群</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p data-key="footer">© 1990 RX</p>
+        </footer>
+    </div>
+
+    <!-- 时钟页面 -->
+    <div class="clock-page" id="clockPage">
+        <h1 class="clock-title">时钟</h1>
+        <div class="clock-container">
+            <div class="clock-face">
+                <div class="clock-number" style="top: 10%; left: 50%; transform: translateX(-50%);">12</div>
+                <div class="clock-number" style="top: 50%; right: 10%; transform: translateY(-50%);">3</div>
+                <div class="clock-number" style="bottom: 10%; left: 50%; transform: translateX(-50%);">6</div>
+                <div class="clock-number" style="top: 50%; left: 10%; transform: translateY(-50%);">9</div>
+                
+                <div class="hour-hand" id="fullHourHand"></div>
+                <div class="minute-hand" id="fullMinuteHand"></div>
+                <div class="second-hand" id="fullSecondHand"></div>
+                
+                <div class="center-circle"></div>
+            </div>
+        </div>
+        
+        <div class="digital-clock" id="fullDigitalClock"></div>
+        
+        <button class="back-btn" id="backFromFullClock">
+            <i class="fas fa-arrow-left"></i> <span data-key="backBtn">返回首页</span>
+        </button>
+    </div>
+
+    <!-- 新闻 -->
+    <div class="news-page" id="newsPage">
+        <div class="news-header">
+            <h1>外援</h1>
+            <p>消息和公告</p>
+        </div>
+        
+        <div id="newsContainer">
+            <div class="news-item">
+                <h3>群公告</h3>
+                <p class="news-content"></p>
+                <img src="https://youke1.picui.cn/s1/2025/11/01/6905b51034bc1.png" alt="图片" class="news-image">
+            </div>
+        </div>
+        
+        <button class="back-btn" id="backFromNews">
+            <i class="fas fa-arrow-left"></i> <span data-key="backBtn">返回首页</span>
+        </button>
+    </div>
+
+    <!-- 下载页面 -->
+    <div class="download-page" id="downloadPage">
+        <div class="download-header">
+            <h1>下载</h1>
+            <p>资源和应用</p>
+        </div>
+        
+        <div class="download-categories">
+            <button class="download-category-btn active" data-category="java">
+                <i class="fab fa-java"></i>
+                <span>Java</span>
+            </button>
+            <button class="download-category-btn" data-category="pe">
+                <i class="fas fa-mobile-alt"></i>
+                <span>PE</span>
+            </button>
+            <button class="download-category-btn" data-category="pc">
+                <i class="fas fa-desktop"></i>
+                <span>PC应用</span>
+            </button>
+            <button class="download-category-btn" data-category="mobile">
+                <i class="fas fa-mobile"></i>
+                <span>PE应用</span>
+            </button>
+        </div>
+        
+        <!-- Java模组内容 -->
+
+        
+        <!-- PE模组内容 -->
+ 
+        
+        <!-- PC应用内容 -->
+ 
+        
+        <!-- PE应用内容 -->
+        <div class="download-content" id="mobile-content">
+            <div class="download-grid">
+                <div class="download-item">
+                    <div class="download-icon">
+                        <img src="https://youke1.picui.cn/s1/2025/11/01/6905a026cd6a2.jpg" alt="PE应用图标">
+                    </div>
+                    <div class="download-info">
+                        <h3>HyperDroid</h3>
+                        <p>拥有高效的模拟程序</p>
+                        <p class="download-date">更新日期: 2020.11.01 | 上传者: shaer</p>
+                    </div>
+                    <a href="https://ttttt.link/f/69059f26155eb" class="download-btn" target="_blank">下载</a>
+                </div>
+            </div>
+        </div>
+        
+        <button class="back-btn" id="backFromDownload">
+            <i class="fas fa-arrow-left"></i> <span data-key="backBtn">返回首页</span>
+        </button>
+    </div>
+
+    <div class="settings-page" id="settingsPage">
+        <div class="settings-header">
+            <button class="back-btn" id="backFromSettings">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1>设置</h1>
+        </div>
+        
+        <div class="settings-section">
+            <h2>功能设置</h2>
+            
+            <div class="settings-option-large">
+                <div class="option-content">
+                    <span>时钟</span>
+                    <div class="option-desc">显示时钟</div>
+                </div>
+                <div class="toggle-switch" id="clockSetting">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            
+            <div class="settings-option-large">
+                <div class="option-content">
+                    <span>外援</span>
+                    <div class="option-desc">显示外援按钮</div>
+                </div>
+                <div class="toggle-switch" id="newsSetting">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            
+            <div class="settings-option-large">
+                <div class="option-content">
+                    <span>下载</span>
+                    <div class="option-desc">启用下载</div>
+                </div>
+                <div class="toggle-switch" id="downloadSetting">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="settings-section">
+            <h2>个性化</h2>
+            
+            <div class="settings-option-large">
+                <div class="option-content">
+                    <span>界面语言</span>
+                    <div class="option-desc">界面语言</div>
+                </div>
+                <select id="languageSelect">
+                    <option value="zh-CN">简体中文</option>
+                    <option value="zh-TW">繁體中文</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+            
+            <div class="settings-option-large">
+                <div class="option-content">
+                    <span>个性化</span>
+                    <div class="option-desc">选择背景主题</div>
+                </div>
+            </div>
+            
+            <div class="settings-option-large">
+                <div class="background-options">
+                    <div class="background-option bg-1 active" data-bg="1"></div>
+                    <div class="background-option bg-2" data-bg="2"></div>
+                    <div class="background-option bg-3" data-bg="3"></div>
+                    <div class="background-option bg-4" data-bg="4"></div>
+                    <div class="background-option bg-5" data-bg="5"></div>
+                    <div class="background-option bg-6" data-bg="6"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="settings-section">
+            <h2>关于</h2>
+            
+            <div class="settings-option-large">
+                <div class="option-content">
+                    <span>信息</span>
+                    <div class="option-desc">2025.11.01</div>
+                </div>
+            </div>
+            
+            <div class="settings-option-large">
+                <div class="option-content">
+                    <span>检查</span>
+                    <div class="option-desc">shaer■■■</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            'zh-CN': {
+                'title': '加入我们',
+                'subtitle': 'QQ@QQ',
+                'groupInfo': '群信息',
+                'welcome': '❌欢迎加入',
+                'joinDesc': '↓点击加入',
+                'joinBtn': '加入QQ群',
+                'footer': '© 1990 RX',
+                'backBtn': '返回首页',
+                'enableClock': '启用时钟',
+                'enableNews': '显示外援',
+                'enableDownload': '启用下载'
+            },
+            'zh-TW': {
+                'title': '加入我們',
+                'subtitle': 'QQ@QQ',
+                'groupInfo': '群信息',
+                'welcome': '❌歡迎加入',
+                'joinDesc': '↓點擊加入',
+                'joinBtn': '加入QQ群',
+                'footer': '© 1990 RX',
+                'backBtn': '返回首頁',
+                'enableClock': '啟用時鐘',
+                'enableNews': '顯示外援',
+                'enableDownload': '啟用下載'
+            },
+            'en': {
+                'title': 'Join Us',
+                'subtitle': 'QQ@QQ',
+                'groupInfo': 'Group Info',
+                'welcome': '❌Welcome to Join',
+                'joinDesc': '↓Click to Join',
+                'joinBtn': 'Join QQ Group',
+                'footer': '© 1990 RX',
+                'backBtn': 'Back to Home',
+                'enableClock': 'Enable Clock',
+                'enableNews': 'Show News Button',
+                'enableDownload': 'Enable Download'
+            }
+        };
+
+        let currentLanguage = 'zh-CN';
+        let clockEnabled = false;
+        let newsEnabled = false;
+        let downloadEnabled = false;
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        function toggleClock() {
+            clockEnabled = !clockEnabled;
+            const clockToggle = document.getElementById('clockToggle');
+            const clockSetting = document.getElementById('clockSetting');
+            const clockDisplay = document.getElementById('clockDisplay');
+            const clockTopBtn = document.getElementById('clockTopBtn');
+            
+            if (clockEnabled) {
+                clockToggle.classList.add('active');
+                clockSetting.classList.add('active');
+                clockDisplay.classList.add('active');
+                clockTopBtn.classList.add('active');
+            } else {
+                clockToggle.classList.remove('active');
+                clockSetting.classList.remove('active');
+                clockDisplay.classList.remove('active');
+                clockTopBtn.classList.remove('active');
+            }
+            localStorage.setItem('clockEnabled', clockEnabled);
+        }
+
+        function toggleNews() {
+            newsEnabled = !newsEnabled;
+            const newsToggle = document.getElementById('newsToggle');
+            const newsSetting = document.getElementById('newsSetting');
+            const newsTopBtn = document.getElementById('newsTopBtn');
+            
+            if (newsEnabled) {
+                newsToggle.classList.add('active');
+                newsSetting.classList.add('active');
+                newsTopBtn.classList.add('active');
+            } else {
+                newsToggle.classList.remove('active');
+                newsSetting.classList.remove('active');
+                newsTopBtn.classList.remove('active');
+            }
+            localStorage.setItem('newsEnabled', newsEnabled);
+        }
+
+        function toggleDownload() {
+            downloadEnabled = !downloadEnabled;
+            const downloadToggle = document.getElementById('downloadToggle');
+            const downloadSetting = document.getElementById('downloadSetting');
+            const downloadTopBtn = document.getElementById('downloadTopBtn');
+            
+            if (downloadEnabled) {
+                downloadToggle.classList.add('active');
+                downloadSetting.classList.add('active');
+                downloadTopBtn.classList.add('active');
+            } else {
+                downloadToggle.classList.remove('active');
+                downloadSetting.classList.remove('active');
+                downloadTopBtn.classList.remove('active');
+            }
+            localStorage.setItem('downloadEnabled', downloadEnabled);
+        }
+
+        function createBubbles() {
+            const bubblesContainer = document.getElementById('bubbles');
+            const bubbleCount = 15;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                const size = Math.random() * 100 + 50;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                bubble.style.left = `${Math.random() * 100}%`;
+                
+                bubble.style.animationDelay = `${Math.random() * 15}s`;
+                bubble.style.animationDuration = `${15 + Math.random() * 10}s`;
+                
+                bubblesContainer.appendChild(bubble);
+            }
+        }
+        
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            if (clockEnabled) {
+                document.getElementById('clockDisplay').textContent = `${hours}:${minutes}:${seconds}`;
+            }
+            
+            const fullDigitalClock = document.getElementById('fullDigitalClock');
+            if (fullDigitalClock) {
+                fullDigitalClock.textContent = `${hours}:${minutes}:${seconds}`;
+            }
+            
+            const fullHourHand = document.getElementById('fullHourHand');
+            const fullMinuteHand = document.getElementById('fullMinuteHand');
+            const fullSecondHand = document.getElementById('fullSecondHand');
+            
+            if (fullHourHand && fullMinuteHand && fullSecondHand) {
+                const hour = now.getHours() % 12;
+                const minute = now.getMinutes();
+                const second = now.getSeconds();
+                
+                const hourDeg = (hour * 30) + (minute * 0.5);
+                const minuteDeg = (minute * 6) + (second * 0.1);
+                const secondDeg = second * 6;
+                
+                fullHourHand.style.transform = `translateX(-50%) rotate(${hourDeg}deg)`;
+                fullMinuteHand.style.transform = `translateX(-50%) rotate(${minuteDeg}deg)`;
+                fullSecondHand.style.transform = `translateX(-50%) rotate(${secondDeg}deg)`;
+            }
+        }
+
+        function changeBackground(bgId) {
+            const body = document.body;
+            
+            body.classList.remove('bg-1', 'bg-2', 'bg-3', 'bg-4', 'bg-5', 'bg-6');
+            
+            body.classList.add(`bg-${bgId}`);
+            
+            document.querySelectorAll('.background-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            document.querySelector(`.background-option[data-bg="${bgId}"]`).classList.add('active');
+            
+            localStorage.setItem('background', bgId);
+        }
+        
+        function switchDownloadCategory(category) {
+            document.querySelectorAll('.download-category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelector(`.download-category-btn[data-category="${category}"]`).classList.add('active');
+            
+            document.querySelectorAll('.download-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.getElementById(`${category}-content`).classList.add('active');
+        }
+        
+        function initializeSettings() {
+            clockEnabled = localStorage.getItem('clockEnabled') === 'true';
+            newsEnabled = localStorage.getItem('newsEnabled') === 'true';
+            downloadEnabled = localStorage.getItem('downloadEnabled') === 'true';
+            const savedLanguage = localStorage.getItem('language') || 'zh-CN';
+            const savedBackground = localStorage.getItem('background') || '1';
+            
+            if (clockEnabled) toggleClock();
+            if (newsEnabled) toggleNews();
+            if (downloadEnabled) toggleDownload();
+            changeLanguage(savedLanguage);
+            changeBackground(savedBackground);
+            
+            document.getElementById('languageSelect').value = savedLanguage;
+        }
+        
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsMenu = document.getElementById('settingsMenu');
+        const newsTopBtn = document.getElementById('newsTopBtn');
+        const clockTopBtn = document.getElementById('clockTopBtn');
+        const downloadTopBtn = document.getElementById('downloadTopBtn');
+        const backFromNews = document.getElementById('backFromNews');
+        const backFromFullClock = document.getElementById('backFromFullClock');
+        const backFromDownload = document.getElementById('backFromDownload');
+        const backFromSettings = document.getElementById('backFromSettings');
+        const newsPage = document.getElementById('newsPage');
+        const clockPage = document.getElementById('clockPage');
+        const downloadPage = document.getElementById('downloadPage');
+        const settingsPage = document.getElementById('settingsPage');
+        const clockToggle = document.getElementById('clockToggle');
+        const newsToggle = document.getElementById('newsToggle');
+        const downloadToggle = document.getElementById('downloadToggle');
+        const clockSetting = document.getElementById('clockSetting');
+        const newsSetting = document.getElementById('newsSetting');
+        const downloadSetting = document.getElementById('downloadSetting');
+        const languageOptions = document.querySelectorAll('.language-options .settings-option');
+        const languageSelect = document.getElementById('languageSelect');
+        const backgroundOptions = document.querySelectorAll('.background-option');
+        const downloadCategoryBtns = document.querySelectorAll('.download-category-btn');
+        
+        settingsBtn.addEventListener('click', function() {
+            settingsMenu.classList.toggle('active');
+        });
+        
+        newsTopBtn.addEventListener('click', function() {
+            newsPage.classList.add('active');
+        });
+        
+        clockTopBtn.addEventListener('click', function() {
+            clockPage.classList.add('active');
+        });
+        
+        downloadTopBtn.addEventListener('click', function() {
+            downloadPage.classList.add('active');
+        });
+        
+        settingsBtn.addEventListener('click', function() {
+            settingsPage.classList.add('active');
+        });
+        
+        backFromNews.addEventListener('click', function() {
+            newsPage.classList.remove('active');
+        });
+        
+        backFromFullClock.addEventListener('click', function() {
+            clockPage.classList.remove('active');
+        });
+        
+        backFromDownload.addEventListener('click', function() {
+            downloadPage.classList.remove('active');
+        });
+        
+        backFromSettings.addEventListener('click', function() {
+            settingsPage.classList.remove('active');
+        });
+        
+        clockToggle.addEventListener('click', function() {
+            toggleClock();
+        });
+        
+        newsToggle.addEventListener('click', function() {
+            toggleNews();
+        });
+        
+        downloadToggle.addEventListener('click', function() {
+            toggleDownload();
+        });
+        
+        clockSetting.addEventListener('click', function() {
+            toggleClock();
+        });
+        
+        newsSetting.addEventListener('click', function() {
+            toggleNews();
+        });
+        
+        downloadSetting.addEventListener('click', function() {
+            toggleDownload();
+        });
+        
+        languageOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                changeLanguage(lang);
+                localStorage.setItem('language', lang);
+                settingsMenu.classList.remove('active');
+            });
+        });
+        
+        languageSelect.addEventListener('change', function() {
+            const lang = this.value;
+            changeLanguage(lang);
+            localStorage.setItem('language', lang);
+        });
+        
+        backgroundOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const bgId = this.getAttribute('data-bg');
+                changeBackground(bgId);
+            });
+        });
+        
+        downloadCategoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                switchDownloadCategory(category);
+            });
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.top-buttons')) {
+                settingsMenu.classList.remove('active');
+            }
+        });
+       
+        createBubbles();
+        updateTime();
+        setInterval(updateTime, 1000);
+        
+        initializeSettings();
+    </script>
+</body>
+</html>
