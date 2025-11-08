@@ -973,3 +973,235 @@
             <div class="settings-option-large">
                 <div class="option-content">
                     <span>外援</span>
+                    <div class="option-desc">显示外援</div>
+                </div>
+                <div class="toggle-switch" id="newsSetting">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            
+            <div class="settings-option-large">
+                <div class="option-content">
+                    <span>下载</span>
+                    <div class="option-desc">启用下载</div>
+                </div>
+                <div class="toggle-switch" id="downloadSetting">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="settings-section">
+            <h2>个性化</h2>
+            
+            <div class="settings-option-large">
+                <div class="option-content">
+                    <span>界面语言</span>
+                    <div class="option-desc">界面语言</div>
+                </div>
+                <select id="languageSelect">
+                    <option value="zh-CN">简体中文</option>
+                    <option value="zh-TW">繁體中文</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+            
+            <div class="settings-option-large">
+                <div class="option-content">
+                    <span>个性化</span>
+                    <div class="option-desc">选择背景主题</div>
+                </div>
+            </div>
+            
+            <div class="settings-option-large">
+                <div class="background-options">
+                    <div class="background-option bg-1 active" data-bg="1"></div>
+                    <div class="background-option bg-2" data-bg="2"></div>
+                    <div class="background-option bg-3" data-bg="3"></div>
+                    <div class="background-option bg-4" data-bg="4"></div>
+                    <div class="background-option bg-5" data-bg="5"></div>
+                    <div class="background-option bg-6" data-bg="6"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="settings-section">
+            <h2>关于</h2>
+            
+            <div class="settings-option-large">
+                <div class="option-content">
+                    <span>信息</span>
+                    <div class="option-desc">2025.11.01</div>
+                </div>
+            </div>
+            
+            <div class="settings-option-large">
+                <div class="option-content">
+                    <span>检查</span>
+                    <div class="option-desc">shaer■■■</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 更新时间显示
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            const fullDigitalClock = document.getElementById('fullDigitalClock');
+            if (fullDigitalClock) {
+                fullDigitalClock.textContent = `${hours}:${minutes}:${seconds}`;
+            }
+        }
+        
+        // 页面切换功能
+        const homeLink = document.getElementById('homeLink');
+        const downloadLink = document.getElementById('downloadLink');
+        const newsLink = document.getElementById('newsLink');
+        const clockLink = document.getElementById('clockLink');
+        const settingsBtn = document.getElementById('settingsBtn');
+        
+        const clockPage = document.getElementById('clockPage');
+        const newsPage = document.getElementById('newsPage');
+        const downloadPage = document.getElementById('downloadPage');
+        const settingsPage = document.getElementById('settingsPage');
+        const settingsMenu = document.getElementById('settingsMenu');
+        
+        const backFromFullClock = document.getElementById('backFromFullClock');
+        const backFromNews = document.getElementById('backFromNews');
+        const backFromDownload = document.getElementById('backFromDownload');
+        const backFromSettings = document.getElementById('backFromSettings');
+        
+        // 首页
+        homeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            clockPage.classList.remove('active');
+            newsPage.classList.remove('active');
+            downloadPage.classList.remove('active');
+            settingsPage.classList.remove('active');
+            settingsMenu.classList.remove('active');
+        });
+        
+        // 下载页面
+        downloadLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            downloadPage.classList.add('active');
+            clockPage.classList.remove('active');
+            newsPage.classList.remove('active');
+            settingsPage.classList.remove('active');
+            settingsMenu.classList.remove('active');
+        });
+        
+        // 外援页面
+        newsLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            newsPage.classList.add('active');
+            clockPage.classList.remove('active');
+            downloadPage.classList.remove('active');
+            settingsPage.classList.remove('active');
+            settingsMenu.classList.remove('active');
+        });
+        
+        // 时钟页面
+        clockLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            clockPage.classList.add('active');
+            newsPage.classList.remove('active');
+            downloadPage.classList.remove('active');
+            settingsPage.classList.remove('active');
+            settingsMenu.classList.remove('active');
+        });
+        
+        // 设置按钮
+        settingsBtn.addEventListener('click', function() {
+            settingsMenu.classList.toggle('active');
+        });
+        
+        // 设置页面
+        settingsBtn.addEventListener('click', function() {
+            settingsPage.classList.add('active');
+            settingsMenu.classList.remove('active');
+        });
+        
+        // 返回按钮
+        backFromFullClock.addEventListener('click', function() {
+            clockPage.classList.remove('active');
+        });
+        
+        backFromNews.addEventListener('click', function() {
+            newsPage.classList.remove('active');
+        });
+        
+        backFromDownload.addEventListener('click', function() {
+            downloadPage.classList.remove('active');
+        });
+        
+        backFromSettings.addEventListener('click', function() {
+            settingsPage.classList.remove('active');
+        });
+        
+        // 下载分类切换
+        const downloadCategoryBtns = document.querySelectorAll('.download-category-btn');
+        
+        downloadCategoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                
+                document.querySelectorAll('.download-category-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                document.querySelectorAll('.download-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                document.getElementById(`${category}-content`).classList.add('active');
+            });
+        });
+        
+        // 个性化设置
+        const backgroundOptions = document.querySelectorAll('.background-option');
+        
+        function changeBackground(bgId) {
+            const body = document.body;
+            
+            body.classList.remove('bg-1', 'bg-2', 'bg-3', 'bg-4', 'bg-5', 'bg-6');
+            body.classList.add(`bg-${bgId}`);
+            
+            document.querySelectorAll('.background-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            document.querySelector(`.background-option[data-bg="${bgId}"]`).classList.add('active');
+            
+            localStorage.setItem('background', bgId);
+        }
+        
+        backgroundOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const bgId = this.getAttribute('data-bg');
+                changeBackground(bgId);
+            });
+        });
+        
+        // 初始化
+        updateTime();
+        setInterval(updateTime, 1000);
+        
+        // 加载保存的背景设置
+        const savedBackground = localStorage.getItem('background') || '1';
+        changeBackground(savedBackground);
+        
+        // 点击页面其他地方关闭设置菜单
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.top-buttons')) {
+                settingsMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
